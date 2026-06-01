@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TRACE – Protótipos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #f7f5f8;
+  --ink: #2d2438;
+  --accent: #5b8ec4;
+  --muted: #8a7a94;
+  --card: #ffffff;
+  --border: #e0d8ea;
+  --tag-psi-bg: #dceef8; --tag-psi-fg: #3a72a8;
+  --tag-pac-bg: #f5dcea; --tag-pac-fg: #a0446c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: "DM Sans", sans-serif; font-size: 16px; line-height: 1.6; }
+
+.hero {
+  position: relative; padding: 72px 48px 64px; overflow: hidden;
+  background: linear-gradient(135deg, #bcdcf5 0%, #d4ccf0 42%, #f0d0e4 100%);
+  border-bottom: 1px solid rgba(160,140,190,0.25);
+}
+.hero::before {
+  content: ''; position: absolute; width: 500px; height: 500px;
+  top: -150px; right: -100px; border-radius: 50%;
+  background: rgba(255,255,255,0.4); filter: blur(70px); pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; width: 320px; height: 320px;
+  bottom: -100px; left: 5%; border-radius: 50%;
+  background: rgba(180,215,245,0.35); filter: blur(60px); pointer-events: none;
+}
+.hero-inner { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #5572a0; margin-bottom: 14px; font-weight: 600; }
+.hero-title { font-family: "DM Serif Display", serif; font-size: clamp(56px, 9vw, 92px); line-height: 1.0; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 6px; }
+.hero-title em { font-style: italic; color: #8868a8; }
+.hero-subtitle { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #7060a0; margin-bottom: 32px; font-weight: 500; }
+.hero-desc { font-size: 17px; line-height: 1.8; color: #3a2e50; max-width: 600px; margin-bottom: 40px; font-weight: 300; }
+.hero-desc strong { font-weight: 600; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+.pill { padding: 5px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.55); border: 1px solid rgba(140,120,180,0.25); color: #5a4870; backdrop-filter: blur(4px); }
+.btn-download { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; padding: 13px 26px; border-radius: 8px; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; transition: opacity 0.2s, transform 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(45,36,56,0.20); font-family: "DM Sans", sans-serif; text-decoration: none; }
+.btn-download:hover { opacity: 0.85; transform: translateY(-2px); }
+
+.filter-bar { padding: 32px 48px 0; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.filter-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); font-weight: 600; margin-right: 4px; }
+.filter-btn { padding: 7px 18px; border-radius: 100px; border: 1.5px solid var(--border); background: transparent; font-family: "DM Sans", sans-serif; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.18s; }
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+.filter-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+.gallery-section { max-width: 1240px; margin: 0 auto; padding: 40px 48px 80px; }
+.section-group { margin-bottom: 56px; }
+.section-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.section-title { font-family: "DM Serif Display", serif; font-size: 26px; letter-spacing: -0.01em; }
+.section-count { font-size: 12px; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+.card { background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.22s, box-shadow 0.22s; cursor: pointer; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(45,36,56,0.10); }
+.card img { width: 100%; height: 230px; object-fit: cover; display: block; background: var(--border); }
+.card-foot { padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; }
+.card-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+.card-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 100px; }
+.tag-psi { background: var(--tag-psi-bg); color: var(--tag-psi-fg); }
+.tag-pac { background: var(--tag-pac-bg); color: var(--tag-pac-fg); }
+
+#lightbox { display: none; position: fixed; inset: 0; background: rgba(30,22,44,0.92); z-index: 1000; align-items: center; justify-content: center; flex-direction: column; padding: 24px; }
+#lightbox.open { display: flex; }
+#lightbox img { max-width: min(90vw, 1100px); max-height: 80vh; object-fit: contain; border-radius: 10px; box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
+#lb-caption { color: rgba(220,210,240,0.65); font-size: 13px; margin-top: 16px; letter-spacing: 0.04em; }
+#lb-nav { position: absolute; top: 50%; transform: translateY(-50%); display: flex; width: 100%; justify-content: space-between; padding: 0 20px; pointer-events: none; }
+.lb-arrow { width: 48px; height: 48px; border-radius: 50%; background: rgba(200,190,220,0.12); border: 1.5px solid rgba(200,190,220,0.22); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; pointer-events: all; transition: background 0.2s; font-size: 20px; }
+.lb-arrow:hover { background: rgba(200,190,220,0.24); }
+#lb-close { position: absolute; top: 20px; right: 24px; background: none; border: none; color: rgba(220,210,240,0.65); font-size: 28px; cursor: pointer; line-height: 1; transition: color 0.2s; }
+#lb-close:hover { color: #fff; }
+
+footer { text-align: center; padding: 28px 40px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+
+@media (max-width: 640px) {
+  .hero { padding: 56px 24px 48px; }
+  .filter-bar, .gallery-section { padding-left: 20px; padding-right: 20px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Protótipos de Interface</p>
+    <h1 class="hero-title">TRACE<em></em></h1>
+    <p class="hero-subtitle">Therapeutic Real-time App &amp; Craving Explorer</p>
+    <p class="hero-desc">
+      Uma plataforma de <strong>acompanhamento comportamental digital</strong> que conecta psicólogos aos seus pacientes de forma contínua e não invasiva. O app registra automaticamente tentativas de abertura de aplicativos monitorados capturando horário, frequência e resultado. Transformando o cotidiano digital em <strong>dados clínicos reais</strong>.
+    </p>
+    <a class="btn-download" href="doc/documentacao.pdf" download="documentacao.pdf">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Baixar Documentação
+    </a>
+  </div>
+</header>
+
+<nav class="filter-bar">
+  <span class="filter-label">Filtrar</span>
+  <button class="filter-btn active" data-filter="all">Todos</button>
+  <button class="filter-btn" data-filter="Psicólogo">Psicóloga</button>
+  <button class="filter-btn" data-filter="Paciente">Paciente</button>
+</nav>
+
+<main class="gallery-section" id="gallery"></main>
+
+<div id="lightbox">
+  <button id="lb-close">&times;</button>
+  <img id="lb-img" src="" alt=""/>
+  <div id="lb-nav">
+    <button class="lb-arrow" id="lb-prev">&#8592;</button>
+    <button class="lb-arrow" id="lb-next">&#8594;</button>
+  </div>
+  <p id="lb-caption"></p>
+</div>
+
+<footer><p>TRACE &mdash; Luíza Nurnberg &mdash; 2026</p></footer>
+
+<script>
+const IMAGES = [{"section": "Paciente", "label": "Telas iniciais", "src": "img/Telas iniciais - paciente.jpg"}, {"section": "Paciente", "label": "Menus principais", "src": "img/Menus principais - paciente.jpg"}, {"section": "Paciente", "label": "Telas bloqueadoras", "src": "img/Telas bloqueadoras - paciente.jpg"}, {"section": "Psic\u00f3logo", "label": "Telas iniciais", "src": "img/Telas iniciais - psic\u00f3logo.jpg"}, {"section": "Psic\u00f3logo", "label": "Telas iniciais (2)", "src": "img/Telas iniciais - psic\u00f3logo-1.jpg"}, {"section": "Psic\u00f3logo", "label": "Menu principal", "src": "img/Menu principal - psic\u00f3logo.jpg"}, {"section": "Psic\u00f3logo", "label": "Menu principal opera\u00e7\u00f5es", "src": "img/Menu principal opera\u00e7\u00f5es- psic\u00f3logo.jpg"}, {"section": "Psic\u00f3logo", "label": "Menu principal opera\u00e7\u00f5es (2)", "src": "img/Menu principal opera\u00e7\u00f5es- psic\u00f3logo-1.jpg"}, {"section": "Psic\u00f3logo", "label": "Menu an\u00e1lises", "src": "img/Menu an\u00e1lises - psic\u00f3logo.jpg"}, {"section": "Psic\u00f3logo", "label": "Menu an\u00e1lises (2)", "src": "img/Menu an\u00e1lises - psic\u00f3logo-1.jpg"}];
+
+let currentFilter = 'all', visibleImages = [], lbIndex = 0;
+
+function render() {
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML = '';
+  visibleImages = [];
+  const groups = {}, order = [];
+  IMAGES.forEach(img => {
+    if (currentFilter !== 'all' && img.section !== currentFilter) return;
+    if (!groups[img.section]) { groups[img.section] = []; order.push(img.section); }
+    groups[img.section].push(img);
+  });
+  order.forEach(section => {
+    const imgs = groups[section];
+    const group = document.createElement('div');
+    group.className = 'section-group';
+    const label = section === 'Psicólogo' ? 'Psicóloga' : section;
+    group.innerHTML = `<div class="section-header"><h2 class="section-title">${label}</h2><span class="section-count">${imgs.length} tela${imgs.length !== 1 ? 's' : ''}</span></div><div class="grid"></div>`;
+    gallery.appendChild(group);
+    const grid = group.querySelector('.grid');
+    imgs.forEach(img => {
+      const vIdx = visibleImages.length;
+      visibleImages.push(img);
+      const card = document.createElement('div');
+      card.className = 'card';
+      const tc = img.section === 'Psicólogo' ? 'tag-psi' : 'tag-pac';
+      const tl = img.section === 'Psicólogo' ? 'Psicóloga' : 'Paciente';
+      card.innerHTML = `<img src="${img.src}" alt="${img.label}" loading="lazy"/><div class="card-foot"><span class="card-label">${img.label}</span><span class="card-tag ${tc}">${tl}</span></div>`;
+      card.addEventListener('click', () => openLightbox(vIdx));
+      grid.appendChild(card);
+    });
+  });
+}
+
+function openLightbox(idx) { lbIndex = idx; updateLB(); document.getElementById('lightbox').classList.add('open'); }
+function updateLB() {
+  const img = visibleImages[lbIndex];
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lb-caption').textContent = img.label + ' · ' + (img.section === 'Psicólogo' ? 'Psicóloga' : 'Paciente');
+}
+document.getElementById('lb-close').onclick = () => document.getElementById('lightbox').classList.remove('open');
+document.getElementById('lb-prev').onclick = () => { lbIndex = (lbIndex - 1 + visibleImages.length) % visibleImages.length; updateLB(); };
+document.getElementById('lb-next').onclick = () => { lbIndex = (lbIndex + 1) % visibleImages.length; updateLB(); };
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) document.getElementById('lightbox').classList.remove('open'); });
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + visibleImages.length) % visibleImages.length; updateLB(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % visibleImages.length; updateLB(); }
+});
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    currentFilter = this.dataset.filter;
+    render();
+  });
+});
+render();
+</script>
+</body>
+</html>
